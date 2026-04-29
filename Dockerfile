@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk AS build
+FROM eclipse-temurin:17-jdk AS build
 WORKDIR /app
 
 COPY pom.xml .
@@ -9,7 +9,7 @@ COPY .mvn .mvn
 RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
-FROM openjdk:17-jdk
+FROM eclipse-temurin:17-jdk
 VOLUME /tmp
 
 COPY --from=build /app/target/*.jar app.jar
